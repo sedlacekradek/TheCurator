@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+{% include "header.html" %}
+
+<body>
+
+<!-- navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark navbar-style">
+    <div class="container-xl visible">
+        <a class="navbar-brand menu-item title" href="{{url_for('home')}}">The Curator</a>
+        <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#nav-bar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="navbar-collapse collapse visible" id="nav-bar">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                                <li class="nav-item menu-item">
+                    <a class="nav-link" href="">About The Curator</a>
+                </li>
+                <li class="nav-item menu-item">
+                    <a class="nav-link" href="">Meet The Curator</a>
+                </li>
+            </ul>
+            <a href="https://www.facebook.com/sedlacek.radek/"><i class="navbar-icon bi bi-facebook"></i></a>
+            <a href="https://github.com/sedlacekradek"><i class="navbar-icon bi bi-github"></i></a>
+            <a href="mailto:sedlacek.radek@email.cz"><i class="navbar-icon bi bi-envelope-fill"></i></a>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid main-container">
+
+<!-- video section -->
+    <div class="row text-center">
+        <div class="col-lg-12 col-md-12 col-sm-12 video-col ">
+            <video src="{{ url_for ('static', filename='video/greek.mp4') }}" autoplay muted loop></video>
+            <div class="welcome">
+                Discover<br>
+                the world<br>
+                of Art
+            </div>
+        </div>
+    </div>
+
+
+    <!-- about section -->
+<div class="row text-center about-row">
+    <h1>About The Curator</h1>
+    <div class="text-field">
+    <p>Welcome art lovers! The Curator is a web app that shows you paintings provided via API of The Metropolitan Museum of Art.
+        You can ask The Curator basic questions regarding the shown piece of art such as the name of the author, title or dimensions.
+        Also, feel free to submit your reviews of the art, The Curator will be more than happy to read them  and through automatic text
+        recognition let you know how much he believes you like the painting and how much he thinks you are being objective in your review.
+        The reviews are not saved on the server (at least for now), so don't be shy and test it out 😉.
+    </p></div>
+</div>
+<hr>
+
+
+<!-- picture section -->
+<div class="row text-center picture-row">
+        <div class="col-lg-12 col-md-12 col-sm-12 picture-row">
+        <img class="painting-image" src="{{ url_for ('static', filename='images/example.jpg') }}"><br>
+<button type="button" class="btn btn-outline-danger btn-lg next-button">next</button>
+        </div>
+</div>
+<hr>
+    <br>
+       <!-- progress bars -->
+    <h5>Rating of objectivity</h5>
+<div class="progress bar-section">
+  <div class="progress-bar objectivity-bar" role="progressbar" style="width: 80%">80%</div>
+</div>
+       <h5>Rating of polarity</h5>
+    <div class="progress bar-section">
+  <div class="progress-bar polarity-bar" role="progressbar" style="width: 55%">55%</div>
+</div>
+
+<!-- input section -->
+<div class="row text-center input-row">
+<div class="form-floating w-50 review-form ">
+  <textarea placeholder="User review goes here" rows="5" style="height:100%;" class="form-control" id="review" name="review-form"></textarea>
+  <label for="review">What do you think about the painting?</label>
+    <button type="button" class="btn btn-outline-light btn-lg">give to The Curator</button>
+</div>
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+{% include "scripts.html" %}
+
+
+
+
+</body>
+</html>
