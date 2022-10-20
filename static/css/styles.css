@@ -60,9 +60,15 @@ background-color: #951818;
 
 .navbar-icon {
     color: #EEEEEE;
-    font-size: 2rem;
+    font-size: 1.8rem;
     padding: 1rem;
 }
+
+.navbar-icon:hover {
+    transition: all 1s;
+    font-size: 2.4rem;
+}
+
 
 /***VIDEO SECTION***/
 .video-col {
@@ -123,6 +129,22 @@ video {
 }
 
 /***BARS SECTION***/
+
+.fade-me-in.htmx-added {
+  opacity: 0;
+}
+
+.fade-me-out.htmx-swapping {
+  opacity: 0;
+  transition: opacity 2.8s ease-out;
+}
+
+.fade-me-in {
+  opacity: 1;
+  transition: opacity 3s;
+}
+
+
 .objectivity-bar {
     background-color: #951818;
 }
@@ -142,6 +164,12 @@ video {
     margin: auto;
 }
 
+.review-text:focus {
+    outline: none !important;
+    border:1px solid #951818;
+    box-shadow: 0 0 10px white;
+  }
+
 /***BAR SECTION***/
 
 .bar-section {
@@ -154,21 +182,47 @@ video {
 
 
 
-/*SPIN ANIMATION*/
+/*****RESPONSIVENESS*****/
 
-.navbar-icon {
-	transition: background 0.2s, color 0.2s;
+/*1800*/
+
+@media (max-width: 1800px) {
+.welcome {
+    position: absolute;
+    top: 15%;
+    left: 8%;
+    font-size: 6rem;
 }
 
-.navbar-icon:hover:before {
-	animation: spinAround 2s linear infinite;
+/*990*/
+
+
+
+@media (max-width: 990px) {
+.welcome {
+    position: absolute;
+    top: 50%;
+    left: 5%;
+    font-size: 5rem;
 }
 
-@keyframes spinAround {
-	from {
-		transform: rotate(0deg)
-	}
-	to {
-		transform: rotate(360deg);
-	}
+video {
+    object-position: 30% 20%;
+    width: 100%;
+    height: 50rem;
+}
+
+.text-field {
+    margin-top: 2rem;
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.painting-image {
+    max-width: 70%;
+
+}
+
+
 }

@@ -1,87 +1,92 @@
 from textblob import TextBlob
 import requests
 import random
-from flask import Flask, session, render_template
+from flask import Flask, session, render_template, request
 import secrets
-from flask_session import Session
+
 
 ## CONSTANTS ###
 FIND_PAINTING_API = 'https://collectionapi.metmuseum.org/public/collection/v1/search?isHighlight=true&departmentId=11&q=""'
 PAINTING_INFO_API = "https://collectionapi.metmuseum.org/public/collection/v1/objects"
 
 
+## EMOTION DETECTION ###
+def emotion_analysis(input_text):
+    """
+    polarity (-1,1) the lower the number, the more negative
+    subjectivity (0,1) 0 - objective, 1 - subjective
+    """
+    blob_text = TextBlob(input_text)
+    sentiment = blob_text.sentiment
+    return sentiment
+
+
 ## FLASK SET-UP ###
 app = Flask(__name__)
 app.secret_key = secrets.token_hex(16)
-recent_list = []
+
+
+## API ###
+response_painting = requests.get(FIND_PAINTING_API)
+data_department = response_painting.json()
+
+
+def load_painting():
+    # get api data
+    random_painting = random.choice(data_department["objectIDs"])
+    response = requests.get(f"{PAINTING_INFO_API}/{random_painting}")
+    data = response.json()
+    # painting data
+    session["image_pic_big"] = data["primaryImage"]
+    session["image_pic_small"] = data["primaryImageSmall"]
+    session["image_title"] = data["title"]
+    session["image_date"] = data["objectDate"]
+    session["image_medium"] = data["medium"]
+    session["image_dimensions"] = data["dimensions"]
+    session["image_located"] = data["repository"]
+    # artist data
+    session["artist_name"] = data["artistDisplayName"]
+    session["artist_link"] = data["artistULAN_URL"]
+    session["artist_nationality"] = data["artistNationality"]
+    session["artist_born"] = data["artistBeginDate"]
+    session["artist_death"] = data["artistEndDate"]
 
 
 ### FLASK MAIN ###
-@app.route("/")
+@app.route("/", methods=["POST", "GET"])
 def home():
-    return render_template("index.html")
+    load_painting()
+    return render_template(
+        'index.html',
+        subjectivity=0,
+        polarity=0,
+        picture=session["image_pic_small"],
+        picture_big=session["image_pic_big"])
 
 
-# ## EMOTION DETECTION ###
-# def emotion_analysis(input_text):
-#     """
-#     polarity (-1,1) the lower the number, the more negative
-#     subjectivity (0,1) 0 - objective, 1 - subjective
-#     """
-#     blob_text = TextBlob(input_text)
-#     sentiment = blob_text.sentiment
-#     return sentiment
-#
-#
-## HELPER FUNCTIONS ###
-# def is_repeated(item, recent):
-#     if len(recent) > 20:
-#         del recent[:5]
-#     if item in recent:
-#         return True
-#     else:
-#         recent.append(item)
-#         return False
-#
-#
-# ## API DATA ###
-# def find_painting():
-#     # get random painting
-#     response_painting = requests.get(FIND_PAINTING_API)
-#     data_department = response_painting.json()
-#     painting = random.choice(data_department["objectIDs"])
-#     if is_repeated(painting, recent_list):
-#         return find_painting()
-#     else:
-#         return painting
-#
-#
-# # get api data
-# random_painting = find_painting()
-# response = requests.get(f"{PAINTING_INFO_API}/{random_painting}")
-# data = response.json()
-# # painting data
-# image_pic_big = data["primaryImage"]
-# image_pic_small = data["primaryImageSmall"]
-# image_title = data["title"]
-# image_date = data["objectDate"]
-# image_medium = data["medium"]
-# image_dimensions = data["dimensions"]
-# image_located = data["repository"]
-# # artist data
-# artist_name = data["artistDisplayName"]
-# artist_link = data["artistULAN_URL"]
-# artist_nationality = data["artistNationality"]
-# artist_born = data["artistBeginDate"]
-# artist_death = data["artistEndDate"]
+@app.route("/next")
+def next_picture():
+    load_painting()
+    return render_template(
+        'next_picture.html',
+        subjectivity=0,
+        polarity=0,
+        picture=session["image_pic_small"],
+        picture_big=session["image_pic_big"])
 
 
-### CHATBOT ###
-#chatbot.py
-
-
-
-
+@app.route("/evaluate", methods=["POST", "GET"])
+def evaluate():
+    if request.method == "POST":
+        review_text = request.form.get("review-text")
+        sentiment = emotion_analysis(review_text)
+        polarity = (list(sentiment)[0])
+        polarity = round(((polarity+1)/2)*100, 2)  # convert to 0-100%, round
+        subjectivity = round((list(sentiment)[1])*100, 2)  # convert to %, round
+    return render_template(
+        'bar_section.html',
+        subjectivity=subjectivity,
+        polarity=polarity)
 
 
 ## TO TEST LOCALLY ###
@@ -93,3 +98,6 @@ def home():
 
 if __name__ == "__main__":
     app.run(debug=True)
+
+
+# todo 1) responsiveness - not working on mobiles 2) code refactor
