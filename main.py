@@ -4,6 +4,7 @@ import random
 from flask import Flask, session, render_template, request
 import secrets
 
+# todo 1) responsiveness - forms width 2) nltk libraries deploy
 
 ## CONSTANTS ###
 FIND_PAINTING_API = 'https://collectionapi.metmuseum.org/public/collection/v1/search?isHighlight=true&departmentId=11&q=""'
@@ -127,12 +128,12 @@ def retrain():
         picture_big=session["image_pic_big"])
 
 
-## TO TEST LOCALLY ###
+# # TO TEST LOCALLY ###
 # if __name__ == "__main__":
 #     from waitress import serve
 #     print("localhost:8080")
 #     serve(app, host='0.0.0.0', port=8080)
 
-
+#
 if __name__ == "__main__":
     app.run(debug=True)

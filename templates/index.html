@@ -36,7 +36,7 @@
     <!-- video section -->
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 video-col">
-            <video src="{{ url_for ('static', filename='video/greek.mp4') }}" autoplay muted loop></video>
+            <video src="{{ url_for ('static', filename='video/greek.mp4') }}" autoplay muted playsinline loop></video>
             <div class="welcome">
                 Discover<br>
                 the world<br>
@@ -99,7 +99,7 @@
 
     <!-- input section -->
     <div class="row input-row">
-        <div class="form-floating w-50 review-form">
+        <div class="review-form">
             <form id="review-form"
                   action="/evaluate"
                   method="post"
@@ -107,8 +107,8 @@
                   hx-target="#bar-section"
                   class="form-inline">
 
-                <textarea name="review-text" placeholder="What do you think about this piece?." rows="3"
-                          style="height:100%; width:100%;" class="form-control review-text" id="review"></textarea>
+                <textarea name="review-text" placeholder="What do you think about this piece?" rows="3"
+                          style="height:100%;" class="form-control review-text" id="review"></textarea>
                 <button id="my-btn" type="submit" class="btn btn-outline-light btn-lg">review</button>
             </form>
 
@@ -121,7 +121,7 @@
                   class="form-inline">
 
                 <textarea name="question-text" placeholder="Do you have any questions?" rows="3"
-                          style="height:100%; width:100%;" class="form-control review-text" id="question"></textarea>
+                          style="height:100%" class="form-control review-text" id="question"></textarea>
                 <button id="my-btn2" type="submit" class="btn btn-outline-light btn-lg">&nbsp;&nbsp;&nbsp;ask&nbsp;&nbsp;&nbsp;</button>
             </form>
 

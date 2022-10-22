@@ -167,6 +167,7 @@ video {
 
 .review-form {
     margin: auto;
+    max-width: 60%;
 }
 
 .review-text:focus {
@@ -179,6 +180,7 @@ video {
   display: flex;
 }
 
+
 /*****RESPONSIVENESS*****/
 
 /*1800*/
@@ -188,6 +190,14 @@ video {
     top: 15%;
     left: 8%;
     font-size: 6rem;
+}
+
+.about-row {
+    width: 55%;
+}
+
+.bar-section {
+    width: 55%;
 }
 
 /*990*/
@@ -204,41 +214,47 @@ video {
 }
 
 .about-row {
-    margin-top: 2rem;
-    width: 70%;
-    margin-left: auto;
-    margin-right: auto;
+    width: 60%;
 }
 
-.painting-image {
-    max-width: 70%;
-}
-
-/*500*/
-@media (max-width: 500px) {
-.welcome {
-    position: absolute;
-    top: 80%;
-    left: 5%;
-    font-size: 3rem;
-}
-
-video {
-    object-position: 45% 20%;
-}
-
-.about-row {
-    margin-top: 2rem;
-    width: 85%;
-    margin-left: auto;
-    margin-right: auto;
+.bar-section {
+    width: 60%;
 }
 
 .painting-image {
     max-width: 90%;
 }
 
+.review-form {
+    max-width: 90%;
+}
 
+/*500*/
+@media (max-width: 500px) {
+.welcome {
+    top: 78%;
+    left: 5%;
+    font-size: 3rem;
+}
 
+video {
+    object-position: 40% 20%;
+}
+
+.about-row {
+    width: 95%;
+}
+
+.bar-section {
+    width: 90%;
+}
+
+.painting-image {
+    max-width: 95%;
+}
+
+.review-form {
+    max-width: 98%;
+}
 
 }

@@ -1,4 +1,3 @@
-import nltk
 import numpy as np
 import tflearn
 import random
@@ -6,7 +5,8 @@ import intents
 import tensorflow as tf
 from nltk.stem.lancaster import LancasterStemmer
 stemmer = LancasterStemmer()
-
+import nltk
+nltk.download('punkt')
 
 ### DATA TO LISTS ###
 data = intents.give_intents()
