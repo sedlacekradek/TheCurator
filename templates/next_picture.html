@@ -1,27 +1,33 @@
-    <section id="next-picture">
-<div class="row text-center picture-row">
-        <div class="col-lg-12 col-md-12 col-sm-12 picture-row">
-            <a href="{{ picture_big }}">
-        <img class="painting-image" src="{{ picture }}"></a><br>
-<button type="button" class="btn btn-outline-danger btn-lg next-button"
-          hx-get="/next"
-          hx-trigger="click"
-          hx-target="#next-picture"
-          hx-swap="outerHTML swap:3s"
->next</button>
+<section id="next-picture" class="fade-me-out">
+
+    <div class="row picture-row">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            <a href="{{ picture_big }}"><img class="painting-image" src="{{ picture }}"></a><br>
+            <button type="button" class="btn btn-outline-danger btn-lg next-button"
+                    hx-get="/next"
+                    hx-trigger="click"
+                    hx-target="#next-picture"
+                    hx-swap="outerHTML swap:2s">next
+            </button>
         </div>
-</div>
-<hr>
+    </div>
+
+    <hr>
     <br>
-       <!-- progress bars -->
-<div id="bar-section">
-    <h5>How subjective you are</h5>
-<div class="progress bar-section">
-  <div class="progress-bar objectivity-bar" role="progressbar" style="width: {{ subjectivity }}%">{{ subjectivity }}%</div>
-</div>
-       <h5>How much you like it</h5>
-    <div class="progress bar-section">
-  <div class="progress-bar polarity-bar" role="progressbar" style="width: {{ polarity }}%">{{ polarity }}%</div>
-</div>
-</div>
+
+    <!-- progress bars -->
+    <div id="bar-section">
+        <h5>How subjective you are</h5>
+        <div class="progress bar-section">
+            <div class="progress-bar objectivity-bar" role="progressbar" style="width: {{ subjectivity }}%">{{
+                subjectivity }}%
+            </div>
+        </div>
+        <h5>How much you like it</h5>
+        <div class="progress bar-section">
+            <div class="progress-bar polarity-bar" role="progressbar" style="width: {{ polarity }}%">{{ polarity }}%
+            </div>
+        </div>
+    </div>
+
 </section>

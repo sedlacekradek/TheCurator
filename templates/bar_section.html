@@ -1,11 +1,13 @@
-<div id="bar-section"  class="fade-me-in" >
+<div id="bar-section" class="fade-me-in">
 
     <h5>How subjective you are</h5>
-<div class="progress bar-section">
-  <div class="progress-bar objectivity-bar" role="progressbar" style="width: {{ subjectivity }}%">{{ subjectivity }}%</div>
-</div>
-       <h5>How much you like it</h5>
     <div class="progress bar-section">
-  <div class="progress-bar polarity-bar" role="progressbar" style="width: {{ polarity }}%">{{ polarity }}%</div>
-</div>
+        <div class="progress-bar curator-bar" role="progressbar" style="width: {{ subjectivity }}%">{{ subjectivity
+            }}%
+        </div>
+    </div>
+    <h5>How much you like it</h5>
+    <div class="progress bar-section">
+        <div class="progress-bar curator-bar" role="progressbar" style="width: {{ polarity }}%">{{ polarity }}%</div>
+    </div>
 </div>
