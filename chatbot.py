@@ -2,7 +2,7 @@ import numpy as np
 import tflearn
 import random
 import intents
-import tensorflow as tf
+from tensorflow.python.framework import ops
 from nltk.stem.lancaster import LancasterStemmer
 stemmer = LancasterStemmer()
 import nltk
@@ -66,9 +66,8 @@ output = np.array(output)
 
 ### MODEL SETUP ###
 net = tflearn.input_data(shape=[None, len(training[0])])  # placeholder for input; always None + array shape (-> in this case - number of words )
-net = tflearn.fully_connected(net, 12)
-net = tflearn.dropout(net, keep_prob=0.9)
-net = tflearn.fully_connected(net, 12)
+net = tflearn.fully_connected(net, 32)
+net = tflearn.fully_connected(net, 32)
 net = tflearn.fully_connected(net, len(output[0]), activation="softmax")  # len(output[0]) -> number of possible results
 net = tflearn.regression(net)  # regression layer with default parameters
 
@@ -78,7 +77,8 @@ model.load("models/model01.tflearn")
 
 def retrain():
     # todo: should unload model before training
-    model.fit(training, output, n_epoch=250, batch_size=12, show_metric=True)
+    ops.reset_default_graph()
+    model.fit(training, output, n_epoch=175, batch_size=24, show_metric=True)
     model.save("models/model01.tflearn")
 
 
@@ -108,8 +108,8 @@ def answer(user_input):
     # print(results[results_index])
     tag = all_tags[results_index]
 
-    # if bot over 50% sure
-    if results[results_index] > 0.5:
+    # if bot over 30% sure
+    if results[results_index] > 0.3:
         data = intents.give_intents()
         for tg in data["intents"]:
             if tg['tag'] == tag:

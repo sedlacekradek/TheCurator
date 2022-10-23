@@ -115,16 +115,17 @@ def give_reply():
     return render_template('answer.html', answer=bot_answer)
 
 
-@app.route("/retrain")
-def retrain():
-    import chatbot
-    chatbot.retrain()
-    return render_template(
-        'index.html',
-        subjectivity=0,
-        polarity=0,
-        picture=session["image_pic_small"],
-        picture_big=session["image_pic_big"])
+## CREATE A MODEL ###
+# @app.route("/retrain")
+# def retrain():
+#     import chatbot
+#     chatbot.retrain()
+#     return render_template(
+#         'index.html',
+#         subjectivity=0,
+#         polarity=0,
+#         picture=session["image_pic_small"],
+#         picture_big=session["image_pic_big"])
 
 
 ## TO TEST LOCALLY ###
@@ -133,6 +134,6 @@ def retrain():
 #     print("localhost:8080")
 #     serve(app, host='0.0.0.0', port=8080)
 
-
+#
 # if __name__ == "__main__":
 #     app.run(debug=True)
