@@ -1,3 +1,5 @@
+import os
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 import numpy as np
 import tflearn
 import random
@@ -6,7 +8,8 @@ from tensorflow.python.framework import ops
 from nltk.stem.lancaster import LancasterStemmer
 stemmer = LancasterStemmer()
 import nltk
-nltk.download('punkt')
+nltk.download('punkt', quiet=True)
+
 
 ### DATA TO LISTS ###
 data = intents.give_intents()

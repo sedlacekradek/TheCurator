@@ -31,7 +31,10 @@
     </div>
 </nav>
 
-<div class="container-fluid main-container">
+<!--load chatbot module-->
+<div class="container-fluid main-container"
+            hx-get="/chatbot"
+            hx-trigger="load">
 
     <!-- video section -->
     <div class="row">

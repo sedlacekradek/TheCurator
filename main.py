@@ -68,6 +68,16 @@ def load_painting():
         session["artist_death"] = data["artistEndDate"]
 
 
+@app.route("/chatbot")
+def load_chatbot():
+    """
+    called on page load - imports chatbot, imported after api data loaded
+    """
+    global chatbot
+    import chatbot
+    return ('', 204)  # return no content
+
+
 ### FLASK MAIN ###
 @app.route("/", methods=["POST", "GET"])
 def home():
@@ -109,7 +119,6 @@ def evaluate():
 @app.route("/reply", methods=["POST", "GET"])
 def give_reply():
     if request.method == "POST":
-        import chatbot
         question = request.form.get("question-text")
         bot_answer = chatbot.answer(question)
     return render_template('answer.html', answer=bot_answer)
@@ -135,5 +144,5 @@ def give_reply():
 #     serve(app, host='0.0.0.0', port=8080)
 
 #
-# if __name__ == "__main__":
-#     app.run(debug=True)
+if __name__ == "__main__":
+    app.run(debug=True)
